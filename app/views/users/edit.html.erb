@@ -1,0 +1,143 @@
+<!-- Validation failure messages -->
+
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- Responsive panel example -->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Edit User #<%= @user.id %></h3>
+      </div>
+      <div class="panel-body">
+        <form action="/update_user/<%= @user.id %>" method="post" class="form-horizontal">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for first_name -->
+          <div class="form-group">
+            <label for="first_name" class="col-sm-2 control-label">
+              First name
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="first_name" name="first_name" placeholder="First name" class="form-control" value="<%= @user.first_name %>">
+            </div>
+          </div>
+
+          <!-- Label and input for last_name -->
+          <div class="form-group">
+            <label for="last_name" class="col-sm-2 control-label">
+              Last name
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="last_name" name="last_name" placeholder="Last name" class="form-control" value="<%= @user.last_name %>">
+            </div>
+          </div>
+
+          <!-- Label and input for gender -->
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label for="gender">
+                  <input type="checkbox" id="gender" name="gender" value="1" <%= "checked" if @user.gender %>>
+                  Gender
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Label and input for description -->
+          <div class="form-group">
+            <label for="description" class="col-sm-2 control-label">
+              Description
+            </label>
+            <div class="col-sm-10">
+              <textarea id="description" name="description" placeholder="Description" class="form-control" rows="3"><%= @user.description %></textarea>
+            </div>
+          </div>
+
+          <!-- Label and input for email -->
+          <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">
+              Email
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="email" name="email" placeholder="Email" class="form-control" value="<%= @user.email %>">
+            </div>
+          </div>
+
+          <!-- Label and input for facebook -->
+          <div class="form-group">
+            <label for="facebook" class="col-sm-2 control-label">
+              Facebook
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="facebook" name="facebook" placeholder="Facebook" class="form-control" value="<%= @user.facebook %>">
+            </div>
+          </div>
+
+          <!-- Label and input for linkedin -->
+          <div class="form-group">
+            <label for="linkedin" class="col-sm-2 control-label">
+              Linkedin
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="linkedin" name="linkedin" placeholder="Linkedin" class="form-control" value="<%= @user.linkedin %>">
+            </div>
+          </div>
+
+          <!-- Label and input for birth_date -->
+          <div class="form-group">
+            <label for="birth_date" class="col-sm-2 control-label">
+              Birth date
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="birth_date" name="birth_date" placeholder="Birth date" class="form-control" value="<%= @user.birth_date %>">
+            </div>
+          </div>
+
+          <!-- Label and input for college -->
+          <div class="form-group">
+            <label for="college" class="col-sm-2 control-label">
+              College
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="college" name="college" placeholder="College" class="form-control" value="<%= @user.college %>">
+            </div>
+          </div>
+
+          <!-- Label and input for phone_number -->
+          <div class="form-group">
+            <label for="phone_number" class="col-sm-2 control-label">
+              Phone number
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="phone_number" name="phone_number" placeholder="Phone number" class="form-control" value="<%= @user.phone_number %>">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-warning">
+                Update User
+              </button>
+              or
+              <a href="/users/<%= @user.id %>">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End responsive panel example -->

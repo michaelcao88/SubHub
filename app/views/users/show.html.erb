@@ -1,0 +1,64 @@
+<!-- Responsive panel example-->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">User #<%= @user.id %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <dl class="dl-horizontal">
+              <dt>First name</dt>
+              <dd><%= @user.first_name %></dd>
+
+              <dt>Last name</dt>
+              <dd><%= @user.last_name %></dd>
+
+              <dt>Gender</dt>
+              <dd><%= @user.gender %></dd>
+
+              <dt>Description</dt>
+              <dd><%= @user.description %></dd>
+
+              <dt>Email</dt>
+              <dd><%= @user.email %></dd>
+
+              <dt>Facebook</dt>
+              <dd><%= @user.facebook %></dd>
+
+              <dt>Linkedin</dt>
+              <dd><%= @user.linkedin %></dd>
+
+              <dt>Birth date</dt>
+              <dd><%= @user.birth_date %></dd>
+
+              <dt>College</dt>
+              <dd><%= @user.college %></dd>
+
+              <dt>Phone number</dt>
+              <dd><%= @user.phone_number %></dd>
+
+            </dl>
+            <div class="btn-group btn-group-justified">
+              <a href="/users" class="btn btn-primary">
+                <i class="fa fa-chevron-left"></i>
+              </a>
+
+              <a href="/users/<%= @user.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+
+              <a href="/delete_user/<%= @user.id %>" class="btn btn-danger" rel="nofollow">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End responsive panel example -->
