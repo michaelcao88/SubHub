@@ -43,21 +43,22 @@
           <dd><%= listing.address %></dd>
 
           <dt>User</dt>
-          <dd><%= listing.user_id %></dd>
+          <dd><%= listing.user.first_name.capitalize %> <%= listing.user.last_name.capitalize %></dd>
 
         </dl>
         <div class="btn-group btn-group-justified">
           <a href="/listings/<%= listing.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>
           </a>
+          <% if current_user.present? && current_user.id == listing.user_id %>
+            <a href="/listings/<%= listing.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
 
-          <a href="/listings/<%= listing.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
-
-          <a href="/delete_listing/<%= listing.id %>" class="btn btn-danger" rel="nofollow">
-            <i class="fa fa-trash-o"></i>
-          </a>
+            <a href="/delete_listing/<%= listing.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          <% end %>
         </div>
       </div>
     </div>
