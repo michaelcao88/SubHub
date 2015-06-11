@@ -1,4 +1,13 @@
 class MessagesController < ApplicationController
+  before_action :check_if_owner, only: [:show, :edit, :update, :destroy]
+
+  def check_if_owner
+    message = Message.find(params[:id])
+    if message.sender_id != current_user.id && message.receiver_id != current_user.id
+        redirect_to "/messages", notice: "Can't access unauthorized message!"
+    end
+  end
+
   def index
     @messages = Message.all
   end
@@ -9,11 +18,15 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
+    @listing = Listing.find(params[:the_listing_id])
+    @receiver = User.find(params[:receiver_id])
   end
 
   def create
     @message = Message.new
-    @message.sender_id = params[:sender_id]
+    @listing = Listing.find(params[:listing_id])
+
+    @message.sender_id = current_user.id
     @message.receiver_id = params[:receiver_id]
     @message.message = params[:message]
     @message.listing_id = params[:listing_id]
@@ -31,9 +44,10 @@ class MessagesController < ApplicationController
 
   def update
     @message = Message.find(params[:id])
+    @listing = Listing.find(params[:listing_id])
 
-    @message.sender_id = params[:sender_id]
-    @message.receiver_id = params[:receiver_id]
+    @message.sender_id = current_user.id
+    @message.receiver_id = @message.receiver.id
     @message.message = params[:message]
     @message.listing_id = params[:listing_id]
 

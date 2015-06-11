@@ -4,31 +4,32 @@
   <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Picture #<%= @picture.id %></h3>
+        <h3 class="panel-title">Picture</h3>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
             <dl class="dl-horizontal">
               <dt>Listing</dt>
-              <dd><%= @picture.listing_id %></dd>
+              <dd><%= @picture.listing.title %></dd>
 
-              <dt>Picture url</dt>
-              <dd><%= @picture.picture_url %></dd>
+              <dt>Picture</dt>
+              <dd><img src="<%= @picture.picture_url %>" style="width:100%"></dd>
 
             </dl>
             <div class="btn-group btn-group-justified">
-              <a href="/pictures" class="btn btn-primary">
+              <a href="/listings/<%= @picture.listing.id %>" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>
               </a>
+              <%if current_user.present? && current_user.id == @picture.listing.user.id %>
+                <a href="/pictures/<%= @picture.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
 
-              <a href="/pictures/<%= @picture.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-
-              <a href="/delete_picture/<%= @picture.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
+                <a href="/delete_picture/<%= @picture.id %>" class="btn btn-danger" rel="nofollow">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
             </div>
           </div>
         </div>

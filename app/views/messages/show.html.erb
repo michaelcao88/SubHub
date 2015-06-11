@@ -4,37 +4,47 @@
   <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Message #<%= @message.id %></h3>
+        <h3 class="panel-title">Message</h3>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
             <dl class="dl-horizontal">
               <dt>Sender</dt>
-              <dd><%= @message.sender_id %></dd>
+              <dd><%= @message.sender.first_name %> <%= @message.sender.last_name %></dd>
 
               <dt>Receiver</dt>
-              <dd><%= @message.receiver_id %></dd>
+              <dd><%= @message.receiver.first_name %> <%= @message.receiver.last_name %></dd>
 
               <dt>Message</dt>
               <dd><%= @message.message %></dd>
 
               <dt>Listing</dt>
-              <dd><%= @message.listing_id %></dd>
+              <dd><%= @message.listing.title %></dd>
 
             </dl>
+            <% if current_user.present? && current_user.id == @message.receiver.id %>
+            <div class="btn-group btn-group-justified">
+                <a href="/messages/new/<%= @message.listing.id %>/<%= @message.sender.id %>" class="btn btn-info">
+                  Reply
+                </a>
+            </div>
+            <br/>
+            <% end %>
+
             <div class="btn-group btn-group-justified">
               <a href="/messages" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>
               </a>
+              <% if current_user.present? && @message.sender.id == current_user.id %>
+                <a href="/messages/<%= @message.id %>/edit" class="btn btn-warning">
+                  <i class="fa fa-edit"></i>
+                </a>
 
-              <a href="/messages/<%= @message.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-
-              <a href="/delete_message/<%= @message.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
+                <a href="/delete_message/<%= @message.id %>" class="btn btn-danger" rel="nofollow">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
             </div>
           </div>
         </div>

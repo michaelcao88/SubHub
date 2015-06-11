@@ -1,7 +1,6 @@
 <div class="page-header">
   <h1>
     Messages
-    <a href="/messages/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
   </h1>
 </div>
 
@@ -17,42 +16,45 @@
 
 <div class="row isotope-container">
 <% @messages.each do |message| %>
+  <%if current_user.present? && (message.sender_id == current_user.id || message.receiver_id == current_user.id) %>
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Message #<%= message.id %></h3>
+        <h3 class="panel-title">Message</h3>
       </div>
       <div class="panel-body">
         <dl>
           <dt>Sender</dt>
-          <dd><%= message.sender_id %></dd>
+          <dd><%= message.sender.first_name %> <%= message.sender.last_name %></dd>
 
           <dt>Receiver</dt>
-          <dd><%= message.receiver_id %></dd>
+          <dd><%= message.receiver.first_name %> <%= message.receiver.last_name %></dd>
 
           <dt>Message</dt>
           <dd><%= message.message %></dd>
 
           <dt>Listing</dt>
-          <dd><%= message.listing_id %></dd>
+          <dd><%= message.listing.title %></dd>
 
         </dl>
         <div class="btn-group btn-group-justified">
           <a href="/messages/<%= message.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>
           </a>
+          <% if current_user.present? && message.sender.id == current_user.id %>
+            <a href="/messages/<%= message.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
 
-          <a href="/messages/<%= message.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
-
-          <a href="/delete_message/<%= message.id %>" class="btn btn-danger" rel="nofollow">
-            <i class="fa fa-trash-o"></i>
-          </a>
+            <a href="/delete_message/<%= message.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
+  <%end%>
 <% end %>
 </div>
 

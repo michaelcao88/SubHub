@@ -28,7 +28,8 @@
               Listing
             </label>
             <div class="col-sm-10">
-              <input type="text" id="listing_id" name="listing_id" placeholder="Listing" class="form-control" value="<%= @picture.listing_id %>">
+              <%= @picture.listing.title %>
+              <input type="hidden" id="listing_id" name="listing_id" placeholder="Listing" class="form-control" value="<%= @picture.listing_id %>">
             </div>
           </div>
 

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # Routes for the Picture resource:
   # CREATE
+  get "/pictures/new/:the_listing_id", :controller => "pictures", :action => "new"
   get "/pictures/new", :controller => "pictures", :action => "new"
   post "/create_picture", :controller => "pictures", :action => "create"
 
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
 
   # Routes for the Message resource:
   # CREATE
+  get "/messages/new/:the_listing_id/:receiver_id", :controller => "messages", :action => "new"
   get "/messages/new", :controller => "messages", :action => "new"
   post "/create_message", :controller => "messages", :action => "create"
 

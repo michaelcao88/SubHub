@@ -28,7 +28,7 @@
               Sender
             </label>
             <div class="col-sm-10">
-              <input type="text" id="sender_id" name="sender_id" placeholder="Sender" class="form-control" value="<%= @message.sender_id %>">
+              <%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %>
             </div>
           </div>
 
@@ -38,7 +38,7 @@
               Receiver
             </label>
             <div class="col-sm-10">
-              <input type="text" id="receiver_id" name="receiver_id" placeholder="Receiver" class="form-control" value="<%= @message.receiver_id %>">
+              <%= @message.receiver.first_name.capitalize %> <%= @message.receiver.last_name.capitalize %>
             </div>
           </div>
 
@@ -58,7 +58,8 @@
               Listing
             </label>
             <div class="col-sm-10">
-              <input type="text" id="listing_id" name="listing_id" placeholder="Listing" class="form-control" value="<%= @message.listing_id %>">
+            <%= @message.listing.title %>
+              <input type="hidden" id="listing_id" name="listing_id" placeholder="Listing" class="form-control" value="<%= @message.listing_id %>">
             </div>
           </div>
 

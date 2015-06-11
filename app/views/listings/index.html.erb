@@ -1,7 +1,9 @@
 <div class="page-header">
   <h1>
     Subleases
+    <% if current_user.present? %>
     <a href="/listings/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
+    <% end %>
   </h1>
 </div>
 

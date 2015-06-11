@@ -51,7 +51,7 @@ class ListingsController < ApplicationController
     @listing.title = params[:title]
     @listing.end_date = params[:end_date]
     @listing.address = params[:address]
-    @listing.user_id = params[:user_id]
+    @listing.user_id = current_user.id
 
     if @listing.save
       redirect_to "/listings", :notice => "Listing updated successfully."
