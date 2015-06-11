@@ -1,6 +1,6 @@
 <div class="page-header">
   <h1>
-    Listings
+    Subleases
     <a href="/listings/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
   </h1>
 </div>
@@ -20,30 +20,27 @@
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Listing #<%= listing.id %></h3>
+        <h3 class="panel-title"><%= listing.title.capitalize %></h3>
       </div>
       <div class="panel-body">
         <dl>
-          <dt>Start date</dt>
-          <dd><%= listing.start_date %></dd>
+          <dt>Subleaser</dt>
+          <dd><%= listing.user.first_name.capitalize %> <%= listing.user.last_name.capitalize %></dd>
 
           <dt>Description</dt>
           <dd><%= listing.description %></dd>
 
           <dt>Rent</dt>
-          <dd><%= listing.rent %></dd>
+          <dd>$<%= listing.rent %> / month</dd>
 
-          <dt>Title</dt>
-          <dd><%= listing.title %></dd>
+          <dt>Start date</dt>
+          <dd><%= listing.start_date %></dd>
 
           <dt>End date</dt>
           <dd><%= listing.end_date %></dd>
 
           <dt>Address</dt>
           <dd><%= listing.address %></dd>
-
-          <dt>User</dt>
-          <dd><%= listing.user.first_name.capitalize %> <%= listing.user.last_name.capitalize %></dd>
 
         </dl>
         <div class="btn-group btn-group-justified">

@@ -4,23 +4,28 @@
   <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Listing #<%= @listing.id %></h3>
+        <h3 class="panel-title"><%= @listing.title.capitalize %></h3>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-12">
+            <div class="col-md-12">
+            <% @listing.pictures.each do |picture| %>
+              <a href="/pictures/<%= picture.id %>"><img src="<%= picture.picture_url %>" style="height:200px"></a>
+            <% end %>
+            </div>
             <dl class="dl-horizontal">
-              <dt>Start date</dt>
-              <dd><%= @listing.start_date %></dd>
+              <dt>Subleaser</dt>
+              <dd><%= @listing.user.first_name.capitalize %> <%= @listing.user.last_name.capitalize %></dd>
 
               <dt>Description</dt>
               <dd><%= @listing.description %></dd>
 
               <dt>Rent</dt>
-              <dd><%= @listing.rent %></dd>
+              <dd>$<%= @listing.rent %> / month</dd>
 
-              <dt>Title</dt>
-              <dd><%= @listing.title %></dd>
+              <dt>Start date</dt>
+              <dd><%= @listing.start_date %></dd>
 
               <dt>End date</dt>
               <dd><%= @listing.end_date %></dd>
@@ -28,15 +33,50 @@
               <dt>Address</dt>
               <dd><%= @listing.address %></dd>
 
-              <dt>User</dt>
-              <dd><%= @listing.user_id %></dd>
+              <dt>Map</dt>
+              <dd>
+                <!-- Code for Google Map -->
+                <script src="http://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+                <script>
+                  var map;
+                  function initialize() {
 
+                    var myLatlng = new google.maps.LatLng(<%= @lat %>, <%= @lng %>);
+
+                    var mapOptions = {
+                      zoom: 15,
+                      center: myLatlng
+                    };
+
+                    map = new google.maps.Map(document.getElementById('map-canvas'),
+                      mapOptions);
+
+                    var marker = new google.maps.Marker({
+                      position: myLatlng,
+                      map: map,
+                      title: 'Au Cheval'
+                    });
+                  }
+
+                  google.maps.event.addDomListener(window, 'load', initialize);
+
+                </script>
+                <div id="map-canvas"></div>
+              </dd>
             </dl>
+            <% if current_user.present? && current_user.id == @listing.user_id %>
+            <div class="btn-group btn-group-justified">
+                <a href="/pictures/new/<%= @listing.id %>" class="btn btn-success">
+                  Add Picture
+                </a>
+            </div>
+            <br/>
+            <% end %>
             <div class="btn-group btn-group-justified">
               <a href="/listings" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>
               </a>
-
+              <% if current_user.present? && current_user.id == @listing.user_id %>
               <a href="/listings/<%= @listing.id %>/edit" class="btn btn-warning">
                 <i class="fa fa-edit"></i>
               </a>
@@ -44,6 +84,7 @@
               <a href="/delete_listing/<%= @listing.id %>" class="btn btn-danger" rel="nofollow">
                 <i class="fa fa-trash-o"></i>
               </a>
+              <% end %>
             </div>
           </div>
         </div>

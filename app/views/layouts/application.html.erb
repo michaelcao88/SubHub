@@ -12,6 +12,11 @@
     body {
       padding-top: 60px;
     }
+
+    #map-canvas {
+      height: 320px;
+      width: 100%;
+    }
   </style>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -40,9 +45,8 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/pictures">Pictures</a></li>
-          <li><a href="/messages">Messages</a></li>
           <li><a href="/listings">Listings</a></li>
+          <li><a href="/messages">Messages</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

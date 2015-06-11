@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'json'
+
 class ListingsController < ApplicationController
   def index
     @listings = Listing.all
@@ -5,6 +8,13 @@ class ListingsController < ApplicationController
 
   def show
     @listing = Listing.find(params[:id])
+
+    # get latitude and longitude
+    url_safe_street_address = URI.encode(@listing.address)
+    google_url = "http://maps.googleapis.com/maps/api/geocode/json?address=#{url_safe_street_address}"
+    parsed_data = JSON.parse(open(google_url).read)
+    @lat = parsed_data["results"][0]["geometry"]["location"]["lat"]
+    @lng = parsed_data["results"][0]["geometry"]["location"]["lng"]
   end
 
   def new
